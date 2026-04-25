@@ -1,0 +1,15 @@
+# Normalize line endings to LF on commit; auto-detect text vs binary.
+# This keeps the repo consistent across Windows/macOS/Linux contributors
+# and prevents CRLF noise from showing up as "modified" files.
+* text=auto eol=lf
+
+# Explicit binary types (defensive — git auto-detects most of these).
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.pdf  binary
+*.zip  binary
+*.woff binary
+*.woff2 binary
