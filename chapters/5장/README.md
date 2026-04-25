@@ -24,7 +24,7 @@
 | [`case-based-problem`](./skills/case-based-problem) | 학생을 의사결정자의 자리에 세우는 사례·상황 제시문 | 단원 진입점 또는 통합·마무리 |
 | [`material-validator`](./skills/material-validator) | 사실확인·시의성·편향·저작권·학생적합성 5명 비평가 점검 | **자료 배포 직전(마지막 게이트)** |
 
-각 스킬 ZIP 다운로드는 [최신 릴리즈 페이지](https://github.com/ChoisMath/AgenticAI-For-Edu/releases/latest)에서 `5장-<스킬이름>.zip` 형식으로 제공됩니다.
+각 스킬 ZIP 다운로드는 [최신 릴리즈 페이지](https://github.com/ChoisMath/AgenticAI-For-Edu/releases/latest)에서 `ch05-<스킬이름>.zip` 형식으로 제공됩니다 (예: `ch05-reading-material.zip`).
 
 ---
 

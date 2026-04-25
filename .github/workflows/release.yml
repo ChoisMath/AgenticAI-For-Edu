@@ -32,7 +32,7 @@ jobs:
           chapter_count=0
 
           for chapter_dir in chapters/*/; do
-            chapter=$(basename "$chapter_dir")        # e.g. "5장"
+            chapter=$(basename "$chapter_dir")           # e.g. "5장"
             skills_dir="${chapter_dir}skills"
 
             if [ ! -d "$skills_dir" ]; then
@@ -40,22 +40,32 @@ jobs:
               continue
             fi
 
+            # Extract leading integer for an ASCII-safe ZIP prefix.
+            # GitHub Release API strips non-ASCII chars from asset names,
+            # so "5장-foo.zip" would arrive as "5.-foo.zip".
+            num=$(echo "$chapter" | grep -oE '^[0-9]+' || true)
+            if [ -z "$num" ]; then
+              echo "WARN: $chapter has no leading number, skipping"
+              continue
+            fi
+            prefix=$(printf "ch%02d" "$num")             # "ch05"
+
             chapter_count=$((chapter_count + 1))
-            echo "=== Processing chapter: $chapter ==="
+            echo "=== Processing chapter: $chapter (prefix=$prefix) ==="
 
             # Per-skill ZIPs (zip from skills/ so the archive root is the skill folder)
             skill_count=0
             for skill_dir in "$skills_dir"/*/; do
               skill=$(basename "$skill_dir")
               skill_count=$((skill_count + 1))
-              echo "  -> ${chapter}-${skill}.zip"
-              (cd "$skills_dir" && zip -rq "$WORK/dist/${chapter}-${skill}.zip" "$skill" \
+              echo "  -> ${prefix}-${skill}.zip"
+              (cd "$skills_dir" && zip -rq "$WORK/dist/${prefix}-${skill}.zip" "$skill" \
                 -x "*.DS_Store" "*/__pycache__/*" "*.pyc")
             done
 
             if [ "$skill_count" -gt 0 ]; then
-              echo "  -> ${chapter}-all-skills.zip ($skill_count skills)"
-              (cd "$skills_dir" && zip -rq "$WORK/dist/${chapter}-all-skills.zip" . \
+              echo "  -> ${prefix}-all-skills.zip ($skill_count skills)"
+              (cd "$skills_dir" && zip -rq "$WORK/dist/${prefix}-all-skills.zip" . \
                 -x "*.DS_Store" "*/__pycache__/*" "*.pyc")
             fi
           done
