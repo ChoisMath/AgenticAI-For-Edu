@@ -43,6 +43,16 @@
 
 ---
 
+## Claude Project 지침
+
+스킬 5개를 한 Project에 묶어 쓸 때 사용할 **Project Instructions** 텍스트를 별도 파일로 제공합니다.
+
+→ **[claude-project-instructions.md 보기/복사](https://github.com/ChoisMath/AgenticAI-For-Edu/blob/main/claude-project-instructions.md)**
+
+페이지 우측 상단의 **복사 아이콘(📋)** 한 번이면 전체 내용이 클립보드에 들어갑니다. claude.ai에서 새 Project를 만들고 **Project Instructions** 영역에 그대로 붙여넣으세요.
+
+---
+
 ## 설치 방법
 
 > 어떤 방식이든 항상 **[최신 릴리즈 페이지](https://github.com/ChoisMath/AgenticAI-For-Edu/releases/latest)** 에서 다운로드하세요. 책 개정 시 이 링크는 자동으로 최신 버전을 가리킵니다.
