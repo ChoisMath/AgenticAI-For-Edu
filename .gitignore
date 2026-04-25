@@ -1,0 +1,22 @@
+# OS / 에디터
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# 임시/백업
+*~
+*.bak
+*.tmp
+
+# 압축본 (저장소에는 풀어둔 폴더 형태만 보관)
+*.zip
+*.tar
+*.tar.gz
+
+# 로컬 작업 메모
+TODO.local.md
+NOTES.local.md
