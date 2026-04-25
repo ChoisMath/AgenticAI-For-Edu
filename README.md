@@ -31,7 +31,7 @@
 claude.ai / 데스크톱 앱 / Claude Code 어디서나 쓸 수 있는 스킬 패키지입니다.
 
 1. **[최신 릴리즈 페이지](https://github.com/ChoisMath/AgenticAI-For-Edu/releases/latest)** 접속
-2. 원하는 ZIP 다운로드 — 파일명은 `<장번호>장-<스킬이름>.zip` 형식 (예: `5장-reading-material.zip`)
+2. 원하는 ZIP 다운로드 — 파일명은 `ch<장번호>-<스킬이름>.zip` 형식 (예: `ch05-reading-material.zip`)
 3. 사용 환경에 맞춰 설치:
    - **claude.ai 웹**: 설정 → Capabilities → Skills → Upload skill에 ZIP 그대로 업로드
    - **Claude 데스크톱(Cowork)**: ZIP 풀어 폴더를 `~/Library/Application Support/Claude/skills/` (macOS) 또는 `%APPDATA%\Claude\skills\` (Windows) 로 복사 → 앱 재시작
@@ -59,20 +59,38 @@ AgenticAI-For-Edu/
 ├── .github/workflows/release.yml          # 태그 푸시 시 ZIP 자동 빌드
 │
 └── chapters/
-    ├── README.md                          # 17장 색인
+    ├── README.md                          # 17장 색인 (제목·요약·상태)
     │
-    └── 5장/
-        ├── README.md                      # 5장 표지 (제목·개요)
-        ├── claude-project-instructions.md # 5장용 Project 지침
-        └── skills/
-            ├── reading-material/
-            ├── activity-sheet/
-            ├── interactive-visualizer/
-            ├── case-based-problem/
-            └── material-validator/
+    ├── 1장/README.md                      # 📖 본문 중심 (별도 자료 없음)
+    ├── 2장/README.md                      # 📖 본문 중심 (별도 자료 없음)
+    ├── 3장/README.md                      # 📖 본문 중심 (별도 자료 없음)
+    │
+    ├── 4장/                               # ✅ 공개 (Project 지침 + 후속 프롬프트 2종)
+    │   ├── README.md
+    │   ├── 프로젝트_지침.md
+    │   ├── 보충자료생성_프롬프트.md
+    │   └── 심화자료생성_프롬프트.md
+    │
+    ├── 5장/                               # ✅ 공개 (Project 지침 + 5개 스킬)
+    │   ├── README.md
+    │   ├── claude-project-instructions.md
+    │   └── skills/
+    │       ├── reading-material/
+    │       ├── activity-sheet/
+    │       ├── interactive-visualizer/
+    │       ├── case-based-problem/
+    │       └── material-validator/
+    │
+    └── (6장~17장은 향후 추가)
 ```
 
-새 장은 `chapters/<번호>장/` 폴더를 만들어 같은 패턴으로 추가합니다.
+### 장 추가 패턴
+
+새 장은 `chapters/<번호>장/` 폴더를 만들어 다음 중 하나의 패턴으로 구성합니다:
+
+- **본문 중심**: `README.md` 만 두고 "별도 디지털 자료 없음" 표기
+- **프롬프트/지침 제공**: `README.md` + 자유로운 이름의 `.md` 파일들 (예: 4장)
+- **Skill 패키지 제공**: `README.md` + `claude-project-instructions.md` + `skills/<스킬이름>/` (예: 5장) — 워크플로우가 자동으로 `ch<번호>-<스킬이름>.zip` 을 만들어 릴리즈에 첨부
 
 ---
 
