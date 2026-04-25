@@ -45,29 +45,40 @@
 
 ## 설치 방법
 
-### 방법 1. Claude 데스크톱 앱(Cowork) 사용자
+> 어떤 방식이든 항상 **[최신 릴리즈 페이지](https://github.com/ChoisMath/AgenticAI-For-Edu/releases/latest)** 에서 다운로드하세요. 책 개정 시 이 링크는 자동으로 최신 버전을 가리킵니다.
 
-1. 이 저장소를 **Code → Download ZIP**으로 받거나, `git clone`으로 복제합니다.
+### 방법 1. claude.ai 웹 사용자 (가장 일반적)
 
-   ```bash
-   git clone https://github.com/<YOUR_USERNAME>/claude-skills-for-teachers.git
-   ```
+1. **[최신 릴리즈](https://github.com/ChoisMath/AgenticAI-For-Edu/releases/latest)** 에서 원하는 스킬 ZIP을 클릭해 다운로드합니다.
+   - 한 개만 필요하면: `reading-material.zip` 같이 개별 파일
+   - 다섯 개를 한꺼번에 받고 싶다면: `claude-skills-for-teachers-all.zip`
+2. claude.ai 접속 → **설정(Settings) → Capabilities → Skills → Upload skill**.
+3. 다운받은 ZIP을 그대로 업로드합니다. **압축 해제 불필요.**
 
-2. 사용하고 싶은 스킬 폴더(예: `reading-material/`)를 통째로 본인의 Claude 스킬 디렉터리로 복사합니다.
+### 방법 2. Claude 데스크톱 앱(Cowork) 사용자
+
+1. 위 릴리즈 페이지에서 원하는 스킬 ZIP을 받아 압축을 풉니다.
+2. 풀어낸 스킬 폴더(예: `reading-material/`)를 본인의 Claude 스킬 디렉터리에 복사합니다.
    - macOS: `~/Library/Application Support/Claude/skills/`
    - Windows: `%APPDATA%\Claude\skills\`
-
 3. Claude 앱을 재시작하면 새 스킬이 자동으로 인식됩니다.
 
-### 방법 2. Claude Code CLI 사용자
+### 방법 3. Claude Code CLI 사용자
 
 `~/.claude/skills/` 아래에 원하는 스킬 폴더를 복사하면 즉시 사용 가능합니다.
 
 ```bash
-cp -r reading-material ~/.claude/skills/
+git clone https://github.com/ChoisMath/AgenticAI-For-Edu.git
+cp -r AgenticAI-For-Edu/reading-material ~/.claude/skills/
 ```
 
-> **팁**: 다섯 스킬을 모두 한 번에 설치하려면 `cp -r */ ~/.claude/skills/`로 처리할 수 있습니다 (저장소 루트에서 실행).
+> **팁**: 다섯 스킬을 한 번에 설치하려면 저장소 루트에서 `cp -r */ ~/.claude/skills/`.
+
+---
+
+## 업데이트 받기
+
+스킬이 개정되면 [Releases 페이지](https://github.com/ChoisMath/AgenticAI-For-Edu/releases)에 새 버전이 올라옵니다. 같은 방법으로 다시 다운로드하여 업로드/복사하면 기존 스킬을 덮어씁니다. 자동 업데이트는 되지 않으므로, 책의 새 판이 나오거나 공지가 있을 때 다시 받아주세요.
 
 ---
 
