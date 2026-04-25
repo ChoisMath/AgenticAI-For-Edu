@@ -17,37 +17,63 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build per-skill ZIPs
+      - name: Build per-chapter / per-skill ZIPs
         run: |
           set -euo pipefail
           mkdir -p dist
+          WORK="$GITHUB_WORKSPACE"
 
-          SKILLS=(
-            "reading-material"
-            "activity-sheet"
-            "interactive-visualizer"
-            "case-based-problem"
-            "material-validator"
-          )
+          if [ ! -d "chapters" ]; then
+            echo "ERROR: chapters/ directory not found"
+            exit 1
+          fi
 
-          for skill in "${SKILLS[@]}"; do
-            if [ -d "$skill" ]; then
-              echo "Packing $skill ..."
-              zip -r "dist/${skill}.zip" "$skill" \
-                -x "*.DS_Store" "*/__pycache__/*" "*.pyc"
-            else
-              echo "WARN: $skill folder not found, skipping"
+          shopt -s nullglob
+          chapter_count=0
+
+          for chapter_dir in chapters/*/; do
+            chapter=$(basename "$chapter_dir")        # e.g. "5장"
+            skills_dir="${chapter_dir}skills"
+
+            if [ ! -d "$skills_dir" ]; then
+              echo "Skip $chapter — no skills/ directory"
+              continue
+            fi
+
+            chapter_count=$((chapter_count + 1))
+            echo "=== Processing chapter: $chapter ==="
+
+            # Per-skill ZIPs (zip from skills/ so the archive root is the skill folder)
+            skill_count=0
+            for skill_dir in "$skills_dir"/*/; do
+              skill=$(basename "$skill_dir")
+              skill_count=$((skill_count + 1))
+              echo "  -> ${chapter}-${skill}.zip"
+              (cd "$skills_dir" && zip -rq "$WORK/dist/${chapter}-${skill}.zip" "$skill" \
+                -x "*.DS_Store" "*/__pycache__/*" "*.pyc")
+            done
+
+            if [ "$skill_count" -gt 0 ]; then
+              echo "  -> ${chapter}-all-skills.zip ($skill_count skills)"
+              (cd "$skills_dir" && zip -rq "$WORK/dist/${chapter}-all-skills.zip" . \
+                -x "*.DS_Store" "*/__pycache__/*" "*.pyc")
             fi
           done
 
-          echo "Packing all-in-one bundle ..."
-          zip -r "dist/claude-skills-for-teachers-all.zip" \
-            "${SKILLS[@]}" README.md LICENSE \
+          if [ "$chapter_count" -eq 0 ]; then
+            echo "ERROR: no chapter folders with skills/ found"
+            exit 1
+          fi
+
+          echo "=== Building all-chapters bundle ==="
+          zip -rq "dist/all-chapters.zip" chapters README.md LICENSE \
             -x "*.DS_Store" "*/__pycache__/*" "*.pyc"
 
+          echo
+          echo "Built artifacts:"
           ls -lh dist
 
-      - name: Upload artifacts (for manual runs)
+      - name: Upload artifacts (manual runs)
         if: github.event_name == 'workflow_dispatch'
         uses: actions/upload-artifact@v4
         with:

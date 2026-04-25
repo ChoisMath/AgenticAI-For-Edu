@@ -1,172 +1,76 @@
-# claude-skills-for-teachers
+# AgenticAI-For-Edu
 
-중·고등학교 교사가 수업 자료를 만들 때 곧바로 쓸 수 있는 **Claude Skills 모음**입니다. 다섯 개의 스킬이 수업의 흐름을 따라 서로 짝을 이루도록 설계되었습니다 — 읽히고, 활동하게 하고, 손으로 조작하게 하고, 자기 사건으로 만들고, 마지막에 한 번 더 점검하는 흐름입니다.
+중·고등학교 교사를 위한 **AgenticAI 활용 가이드 (총 17장)** 의 코드/자료 저장소입니다. 각 장에서 실제로 사용하는 Claude Skill, Project 지침, 보조 자료가 장별 폴더에 들어 있습니다.
 
 > 책임자: **SSamVibe**
 > 라이선스: [MIT](./LICENSE)
 
 ---
 
-## 어떤 스킬이 들어 있나요?
+## 장별 자료
 
-| 스킬 | 한 줄 설명 | 호출 시점 |
+📚 **[전체 17장 색인 보기](./chapters/README.md)**
+
+| 장 | 폴더 | 상태 |
 |---|---|---|
-| [`reading-material`](./reading-material) | 학생을 텍스트 앞에 멈춰 세우는 사고 유발 읽기 자료 | 단원 도입부, 본문 학습용 글 |
-| [`activity-sheet`](./activity-sheet) | '예상–확인–설명–재해석' 4단 구조의 종이 활동지 | 차시 활동, 워크시트 |
-| [`interactive-visualizer`](./interactive-visualizer) | 슬라이더·그래프로 학생이 직접 조작하는 학습 도구 (Claude Artifact) | 개념 체득, 탐구 도구 |
-| [`case-based-problem`](./case-based-problem) | 학생을 의사결정자의 자리에 세우는 사례·상황 제시문 | 단원 진입점 또는 통합·마무리 |
-| [`material-validator`](./material-validator) | 사실확인·시의성·편향·저작권·학생적합성 5명 비평가 점검 | **자료 배포 직전(마지막 게이트)** |
+| 5장 | [`chapters/5장/`](./chapters/5장) | ✅ 공개 (5개 스킬 + Project 지침) |
+| 그 외 | — | 준비 중 |
 
-각 폴더 안의 `SKILL.md`가 해당 스킬의 정식 정의 파일입니다. `resources/`에는 작성 기준이 되는 자료가, `subagents/`에는 비평가 모드 정의가 들어 있습니다.
+새 장이 공개될 때마다 위 색인이 갱신됩니다.
 
 ---
 
-## 스킬 다섯 개의 흐름
+## 자료 받는 방법 (공통)
 
-```
-[reading-material]           ──▶ 단원 도입부에서 학생을 멈춰 세움
-        │
-        ▼
-[activity-sheet]             ──▶ 사고 흐름을 종이 위에 시각화
-        │
-        ▼
-[interactive-visualizer]     ──▶ 손으로 조작하며 개념 체득
-        │
-        ▼
-[case-based-problem]         ──▶ 자기 가치관으로 결정 내림
-        │
-        ▼
-[material-validator]         ──▶ 배포 직전, 다섯 비평가가 마지막 점검
-```
+저장소의 자료는 두 종류로 제공됩니다.
 
-이 순서는 강제가 아니라 권장입니다. 단원 성격에 따라 한두 개만 골라 써도 되고, 순서를 뒤집어도 됩니다. 단 **`material-validator`만은 학생 배포 직전에 항상 호출**하는 것을 권장합니다.
+### A. Claude Skill (`.zip`)
 
----
+claude.ai / 데스크톱 앱 / Claude Code 어디서나 쓸 수 있는 스킬 패키지입니다.
 
-## Claude Project 지침
+1. **[최신 릴리즈 페이지](https://github.com/ChoisMath/AgenticAI-For-Edu/releases/latest)** 접속
+2. 원하는 ZIP 다운로드 — 파일명은 `<장번호>장-<스킬이름>.zip` 형식 (예: `5장-reading-material.zip`)
+3. 사용 환경에 맞춰 설치:
+   - **claude.ai 웹**: 설정 → Capabilities → Skills → Upload skill에 ZIP 그대로 업로드
+   - **Claude 데스크톱(Cowork)**: ZIP 풀어 폴더를 `~/Library/Application Support/Claude/skills/` (macOS) 또는 `%APPDATA%\Claude\skills\` (Windows) 로 복사 → 앱 재시작
+   - **Claude Code CLI**: ZIP 풀어 폴더를 `~/.claude/skills/` 로 복사
 
-스킬 5개를 한 Project에 묶어 쓸 때 사용할 **Project Instructions** 텍스트를 별도 파일로 제공합니다.
+### B. Claude Project 지침 (`.md`)
 
-→ **[claude-project-instructions.md 보기/복사](https://github.com/ChoisMath/AgenticAI-For-Edu/blob/main/claude-project-instructions.md)**
+Project Instructions 영역에 붙여 쓰는 시스템 프롬프트입니다.
 
-페이지 우측 상단의 **복사 아이콘(📋)** 한 번이면 전체 내용이 클립보드에 들어갑니다. claude.ai에서 새 Project를 만들고 **Project Instructions** 영역에 그대로 붙여넣으세요.
+1. 해당 장의 `claude-project-instructions.md` 페이지 접속 (장별 README에 링크)
+2. 페이지 우측 상단의 **복사 아이콘(📋)** 클릭 → 전체 내용이 클립보드로 들어감
+3. claude.ai 새 Project 생성 → **Project Instructions** 영역에 붙여넣기
 
----
-
-## 설치 방법
-
-> 어떤 방식이든 항상 **[최신 릴리즈 페이지](https://github.com/ChoisMath/AgenticAI-For-Edu/releases/latest)** 에서 다운로드하세요. 책 개정 시 이 링크는 자동으로 최신 버전을 가리킵니다.
-
-### 방법 1. claude.ai 웹 사용자 (가장 일반적)
-
-1. **[최신 릴리즈](https://github.com/ChoisMath/AgenticAI-For-Edu/releases/latest)** 에서 원하는 스킬 ZIP을 클릭해 다운로드합니다.
-   - 한 개만 필요하면: `reading-material.zip` 같이 개별 파일
-   - 다섯 개를 한꺼번에 받고 싶다면: `claude-skills-for-teachers-all.zip`
-2. claude.ai 접속 → **설정(Settings) → Capabilities → Skills → Upload skill**.
-3. 다운받은 ZIP을 그대로 업로드합니다. **압축 해제 불필요.**
-
-### 방법 2. Claude 데스크톱 앱(Cowork) 사용자
-
-1. 위 릴리즈 페이지에서 원하는 스킬 ZIP을 받아 압축을 풉니다.
-2. 풀어낸 스킬 폴더(예: `reading-material/`)를 본인의 Claude 스킬 디렉터리에 복사합니다.
-   - macOS: `~/Library/Application Support/Claude/skills/`
-   - Windows: `%APPDATA%\Claude\skills\`
-3. Claude 앱을 재시작하면 새 스킬이 자동으로 인식됩니다.
-
-### 방법 3. Claude Code CLI 사용자
-
-`~/.claude/skills/` 아래에 원하는 스킬 폴더를 복사하면 즉시 사용 가능합니다.
-
-```bash
-git clone https://github.com/ChoisMath/AgenticAI-For-Edu.git
-cp -r AgenticAI-For-Edu/reading-material ~/.claude/skills/
-```
-
-> **팁**: 다섯 스킬을 한 번에 설치하려면 저장소 루트에서 `cp -r */ ~/.claude/skills/`.
-
----
-
-## 업데이트 받기
-
-스킬이 개정되면 [Releases 페이지](https://github.com/ChoisMath/AgenticAI-For-Edu/releases)에 새 버전이 올라옵니다. 같은 방법으로 다시 다운로드하여 업로드/복사하면 기존 스킬을 덮어씁니다. 자동 업데이트는 되지 않으므로, 책의 새 판이 나오거나 공지가 있을 때 다시 받아주세요.
-
----
-
-## 스킬 호출 예시
-
-스킬이 설치되면 Claude에게 자연스럽게 부탁하기만 하면 됩니다.
-
-```
-"<대수> 지수함수의 활용 단원 도입부 읽기 자료 만들어 줘. 고2, 800자."
-→ reading-material 자동 호출
-
-"방금 그 자료에 맞는 활동지 만들어 줘. A4 한 장, 1차시."
-→ activity-sheet 자동 호출
-
-"학생이 슬라이더로 직접 조작할 수 있는 인터랙티브 도구로 만들어 줘."
-→ interactive-visualizer 자동 호출
-
-"학생이 자기 결정을 내려야 하는 사례 기반 문제도 같이 만들자."
-→ case-based-problem 자동 호출
-
-"이 자료들 학생에게 나누기 전에 점검해 줘."
-→ material-validator 자동 호출 (다섯 비평가 동시 가동)
-```
+> 자료가 개정되면 동일한 절차로 다시 받아 덮어쓰면 됩니다. 자동 업데이트는 되지 않습니다.
 
 ---
 
 ## 폴더 구조
 
 ```
-claude-skills-for-teachers/
-├── README.md
+AgenticAI-For-Edu/
+├── README.md                              # (이 파일) 책 전체 안내
 ├── LICENSE
-├── .gitignore
+├── .gitattributes
+├── .github/workflows/release.yml          # 태그 푸시 시 ZIP 자동 빌드
 │
-├── reading-material/
-│   ├── SKILL.md
-│   ├── resources/
-│   │   ├── 3가지_조건.md
-│   │   └── 4가지_문제_진단.md
-│   └── subagents/
-│       └── 비평가.md
-│
-├── activity-sheet/
-│   ├── SKILL.md
-│   ├── resources/
-│   │   ├── 4단_구조_설계.md
-│   │   └── 세_층위_분포.md
-│   └── subagents/
-│       └── 비평가.md
-│
-├── interactive-visualizer/
-│   ├── SKILL.md
-│   ├── resources/
-│   │   ├── Mayer_5원리.md
-│   │   └── 좋은_바이브코딩_프롬프트의_4요소.md
-│   └── subagents/
-│       └── 비평가.md
-│
-├── case-based-problem/
-│   ├── SKILL.md
-│   ├── resources/
-│   │   ├── 사례_4가지_조건.md
-│   │   └── 사례_표준_6원칙.md
-│   └── subagents/
-│       └── 비평가.md
-│
-└── material-validator/
-    ├── SKILL.md
-    ├── resources/
-    │   ├── 5분_점검_5항목.md
-    │   └── 위험_신호_진단표.md
-    └── subagents/
-        ├── 사실확인_비평가.md
-        ├── 시의성_비평가.md
-        ├── 저작권_비평가.md
-        ├── 편향_비평가.md
-        └── 학생적합성_비평가.md
+└── chapters/
+    ├── README.md                          # 17장 색인
+    │
+    └── 5장/
+        ├── README.md                      # 5장 표지 (제목·개요)
+        ├── claude-project-instructions.md # 5장용 Project 지침
+        └── skills/
+            ├── reading-material/
+            ├── activity-sheet/
+            ├── interactive-visualizer/
+            ├── case-based-problem/
+            └── material-validator/
 ```
+
+새 장은 `chapters/<번호>장/` 폴더를 만들어 같은 패턴으로 추가합니다.
 
 ---
 
